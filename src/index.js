@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from './components';
+import { setStore } from 'mobx-react-wrapper/dist/mobx-react-wrapper.js';
+import store from './store';
 import * as serviceWorker from './serviceWorker';
+
+setStore(store);
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

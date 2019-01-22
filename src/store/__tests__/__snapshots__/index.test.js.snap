@@ -2,7 +2,7 @@
 
 exports[`saves changes in localStorage 1`] = `
 Object {
-  "isSelected": false,
+  "isEnabled": false,
 }
 `;
 
@@ -10,8 +10,8 @@ exports[`saves changes in localStorage 2`] = `null`;
 
 exports[`saves changes in localStorage 3`] = `
 Object {
-  "isSelected": true,
+  "isEnabled": true,
 }
 `;
 
-exports[`saves changes in localStorage 4`] = `"{\\"isSelected\\":true}"`;
+exports[`saves changes in localStorage 4`] = `"{\\"isEnabled\\":true}"`;

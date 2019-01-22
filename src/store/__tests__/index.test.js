@@ -4,7 +4,7 @@ it('saves changes in localStorage', () => {
   expect(store).toMatchSnapshot();
   expect(window.localStorage.getItem('mst-store')).toMatchSnapshot();
 
-  store.toggleSelected();
+  store.toggleEnabled();
 
   expect(store).toMatchSnapshot();
   expect(window.localStorage.getItem('mst-store')).toMatchSnapshot();

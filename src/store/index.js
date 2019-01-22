@@ -2,10 +2,10 @@ import { types, onSnapshot } from 'mobx-state-tree';
 
 const Store = types
   .model('Positions', {
-    isSelected: false,
+    isEnabled: false,
   })
   .actions(self => ({
-    toggleSelected: () => (self.isSelected = !self.isSelected),
+    toggleEnabled: () => (self.isEnabled = !self.isEnabled),
   }));
 
 const store = Store.create(
