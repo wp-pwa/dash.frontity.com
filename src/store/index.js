@@ -1,9 +1,11 @@
 import { types } from 'mobx-state-tree';
 import { initRouter } from './router';
 import RouterStore from './RouterStore';
+import AccessStore from './AccessStore';
 
 const Store = types.model('Positions', {
   router: types.optional(RouterStore, {}),
+  access: types.optional(AccessStore, {}),
 });
 
 // const store = Store.create(

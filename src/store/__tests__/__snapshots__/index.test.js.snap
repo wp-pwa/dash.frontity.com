@@ -2,6 +2,11 @@
 
 exports[`has the right properties 1`] = `
 Object {
+  "access": Object {
+    "isLoggedIn": false,
+    "isWaiting": false,
+    "user": undefined,
+  },
   "router": Object {
     "page": "sites",
     "selectedSiteId": "",
