@@ -1,37 +1,44 @@
 import React from 'react';
-import { Grommet, Box, Paragraph, Anchor, Text, CheckBox } from 'grommet';
+import { Grommet, Box, Heading } from 'grommet';
 import { grommet } from 'grommet/themes';
-import { Reactjs as Icon } from 'grommet-icons';
 import wrap from 'mobx-react-wrapper/dist/mobx-react-wrapper.js';
 
-const App = ({ isEnabled, toggleEnabled }) => (
-  <Grommet theme={grommet}>
-    <Box fill pad="xlarge" align="center">
-      <Icon className="App-logo" alt="logo" size="xlarge" color="brand" />
-      <Paragraph>
-        Edit <Text as="code">src/App.js</Text> and save to reload.
-      </Paragraph>
-      <Box>
-        <Anchor
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </Anchor>
+import Sites from './Sites';
+import NewSite from './NewSite';
+import Site from './Site';
+import LogIn from './LogIn';
+import SignUp from './SignUp';
+
+const Page404 = () => <Heading>404</Heading>;
+
+const getPageComponent = page => {
+  switch (page) {
+    case 'sites':
+      return Sites;
+    case 'new-site':
+      return NewSite;
+    case 'site':
+      return Site;
+    case 'login':
+      return LogIn;
+    case 'signup':
+      return SignUp;
+    default:
+      return Page404;
+  }
+};
+
+const App = ({ page }) => {
+  const Page = getPageComponent(page);
+  return (
+    <Grommet theme={grommet}>
+      <Box fill>
+        <Page />
       </Box>
-      <CheckBox
-        toggle
-        label="enabled"
-        checked={isEnabled}
-        onChange={toggleEnabled}
-      />
-    </Box>
-  </Grommet>
-);
+    </Grommet>
+  );
+};
 
 export default wrap.default(store => ({
-  isEnabled: store.isEnabled,
-  toggleEnabled: store.toggleEnabled,
+  page: store.router.page,
 }))(App);
