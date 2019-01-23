@@ -1,11 +1,5 @@
 import store from '..';
 
-it('saves changes in localStorage', () => {
+it('has the right properties', () => {
   expect(store).toMatchSnapshot();
-  expect(window.localStorage.getItem('mst-store')).toMatchSnapshot();
-
-  store.toggleEnabled();
-
-  expect(store).toMatchSnapshot();
-  expect(window.localStorage.getItem('mst-store')).toMatchSnapshot();
 });
