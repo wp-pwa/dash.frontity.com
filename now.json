@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "name": "dash-frontity-com",
+  "alias": ["dash.frontity.com"],
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@now/static-build"
+    }
+  ]
+}

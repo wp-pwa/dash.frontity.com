@@ -40,7 +40,8 @@
     "cz": "git-cz",
     "lint-staged": "lint-staged",
     "travis-deploy-once": "travis-deploy-once",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "now-build": "react-scripts build && mv build dist"
   },
   "eslintConfig": {
     "extends": "react-app"
