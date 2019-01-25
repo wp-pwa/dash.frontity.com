@@ -1,20 +1,17 @@
-import { types, flow } from 'mobx-state-tree';
-import client from '../graphql/client';
-
-const User = types.model('User', {
-  name: types.string,
-  email: types.string,
-});
+import { types, flow, getParent } from 'mobx-state-tree';
+import client, { setToken, removeToken } from '../graphql/client';
 
 export default types
   .model({
-    user: types.maybe(User),
     isWaiting: false,
     isLoggedIn: false,
+    hasFailed: false,
   })
   .actions(self => ({
     logIn: flow(function* logIn({ value: emailAndPass }) {
       self.isWaiting = true;
+      self.hasFailed = false;
+      self.isLoggedIn = false;
       try {
         const { authenticateUser } = yield client.request(
           `
@@ -27,13 +24,39 @@ export default types
           emailAndPass,
         );
 
-        const { token } = authenticateUser;
-
-        self.isWaiting = true;
+        setToken(authenticateUser.token);
         self.isLoggedIn = true;
+
+        // Request user data
+        const { user } = yield client.request(
+          `
+          query getUser {
+            user {
+              name
+              email
+            }
+          }
+          `,
+        );
+
+        console.log(user);
+
+        getParent(self).setUser(user);
+
+        // Redirects to main page
+        getParent(self).router.openSitesPage();
       } catch (error) {
-        self.isWaiting = false;
+        console.log(error);
         self.isLoggedIn = false;
+        self.hasFailed = true;
       }
+
+      self.isWaiting = false;
     }),
+    logOut: () => {
+      removeToken();
+      self.isLoggedIn = false;
+      // Redirects to login page
+      getParent(self).router.openLogInPage();
+    },
   }));
