@@ -1,22 +1,58 @@
-import { types } from 'mobx-state-tree';
+import { types, flow } from 'mobx-state-tree';
 import { initRouter } from './router';
-import RouterStore from './RouterStore';
-import AccessStore from './AccessStore';
-
-const User = types.model('User', {
-  name: types.string,
-  email: types.string,
-});
+import RouterStore from './router-store';
+import access from './access-actions';
+import { User } from './graphql-models';
+import client from '../graphql/client';
 
 const Store = types
-  .model('Positions', {
-    user: types.maybe(User),
+  .model('Dashboard', {
+    user: types.maybeNull(User),
     router: types.optional(RouterStore, {}),
-    access: types.optional(AccessStore, {}),
   })
+  .volatile(() => ({
+    isWaitingForUser: true,
+  }))
+  .views(self => ({
+    get isLoggedIn() {
+      return !!self.user;
+    },
+  }))
   .actions(self => ({
-    setUser: user => (self.user = user),
-  }));
+    updateUser: flow(function* updateUser() {
+      self.isWaitingForUser = true;
+      const { user } = yield client.request(
+        `
+          query getUser {
+            user {
+              id
+              name
+              email
+              sites {
+                id
+                siteId
+                url
+                settings {
+                  id
+                  active
+                  data
+                  package {
+                    id
+                    name
+                    namespace
+                  }
+                }
+              }
+            }
+          }
+        `,
+      );
+      self.user = user;
+      self.isWaitingForUser = false;
+    }),
+    afterCreate: () => self.updateUser(),
+  }))
+  .actions(access);
 
 const store = Store.create({});
 initRouter(store);

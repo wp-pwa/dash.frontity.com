@@ -2,15 +2,10 @@
 
 exports[`has the right properties 1`] = `
 Object {
-  "access": Object {
-    "hasFailed": false,
-    "isLoggedIn": false,
-    "isWaiting": false,
-  },
   "router": Object {
-    "page": "login",
+    "page": "sites",
     "selectedSiteId": "",
   },
-  "user": undefined,
+  "user": null,
 }
 `;

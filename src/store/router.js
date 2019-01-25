@@ -1,7 +1,7 @@
 import { reaction } from 'mobx';
 import route from 'path-match';
 
-export const createRouter = routes => {
+const createRouter = routes => {
   const matchers = Object.keys(routes).map(path => [
     route()(path),
     routes[path],
@@ -28,8 +28,6 @@ export const initRouter = store => {
   const router = createRouter({
     '/new-site': store.router.openNewSitePage,
     '/site/:siteId': ({ siteId }) => store.router.openSitePageById(siteId),
-    '/login': store.router.openLogInPage,
-    '/signup': store.router.openSignUpPage,
     '/': store.router.openSitesPage,
   });
 
