@@ -3,13 +3,14 @@
 exports[`has the right properties 1`] = `
 Object {
   "access": Object {
+    "hasFailed": false,
     "isLoggedIn": false,
     "isWaiting": false,
-    "user": undefined,
   },
   "router": Object {
-    "page": "sites",
+    "page": "login",
     "selectedSiteId": "",
   },
+  "user": undefined,
 }
 `;
