@@ -14,10 +14,6 @@ export default types
           return '/new-site';
         case 'site':
           return '/site/' + self.selectedSiteId;
-        case 'login':
-          return '/login';
-        case 'signup':
-          return '/signup';
         default:
           return '/404';
       }
@@ -39,13 +35,5 @@ export default types
     openSitePageById(id) {
       self.page = 'site';
       self.selectedSiteId = id;
-    },
-    openLogInPage() {
-      self.page = 'login';
-      self.selectedSiteId = '';
-    },
-    openSignUpPage() {
-      self.page = 'signup';
-      self.selectedSiteId = '';
     },
   }));

@@ -6,5 +6,6 @@ Object {
     "page": "sites",
     "selectedSiteId": "",
   },
+  "user": null,
 }
 `;
