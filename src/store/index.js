@@ -1,7 +1,7 @@
 import { types, flow } from 'mobx-state-tree';
 import { initRouter } from './router';
 import RouterStore from './router-store';
-import access from './access-actions';
+import * as access from './access-actions';
 import { User } from './graphql-models';
 import client from '../graphql/client';
 
@@ -52,7 +52,8 @@ const Store = types
     }),
     afterCreate: () => self.updateUser(),
   }))
-  .actions(access);
+  .volatile(access.volatile)
+  .actions(access.actions);
 
 const store = Store.create({});
 initRouter(store);
