@@ -12,7 +12,7 @@ import {
 } from 'grommet';
 import wrap from 'mobx-react-wrapper/dist/mobx-react-wrapper.js';
 
-const LogIn = ({ openSignUpPage, logIn, isLoggedIn, isWaiting }) =>
+const LogIn = ({ openSignUpModal, logIn, isLoggedIn, isWaiting }) =>
   !(isLoggedIn || isWaiting) ? (
     <Layer modal position="center">
       <Box width="medium" elevation="large" pad="large" gap="large">
@@ -46,7 +46,7 @@ const LogIn = ({ openSignUpPage, logIn, isLoggedIn, isWaiting }) =>
           </Box>
         </Form>
         <Text>
-          Not a user yet? <Anchor onClick={openSignUpPage}>Sign up!</Anchor>
+          Not a user yet? <Anchor onClick={openSignUpModal}>Sign up!</Anchor>
         </Text>
       </Box>
     </Layer>
@@ -56,5 +56,5 @@ export default wrap.default(store => ({
   logIn: store.logIn,
   isLoggedIn: store.isLoggedIn,
   isWaiting: store.isWaitingForUser,
-  // openSignUpPage: store.router.openSignUpPage,
+  openSignUpModal: store.openSignUpModal,
 }))(LogIn);

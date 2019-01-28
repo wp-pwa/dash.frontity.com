@@ -5,7 +5,7 @@ import TopBar from './TopBar';
 import Page from './Page';
 import LogIn from './LogIn';
 import InProgress from './InProgress';
-// import SignUp from './SignUp';
+import SignUp from './SignUp';
 
 const App = () => (
   <Grommet theme={grommet}>
@@ -13,7 +13,7 @@ const App = () => (
       <TopBar />
       <Page />
       <LogIn />
-      {/* <SignUp /> */}
+      <SignUp />
       <InProgress />
     </Box>
   </Grommet>
