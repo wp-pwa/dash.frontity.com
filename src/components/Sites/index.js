@@ -2,28 +2,25 @@ import React from 'react';
 import { Box, Heading, Text, Anchor, Button } from 'grommet';
 import wrap from 'mobx-react-wrapper/dist/mobx-react-wrapper.js';
 
-const Sites = ({ user, openSitePageById, openNewSitePage, logOut }) => (
+const Sites = ({ user, openSitePage, openNewSitePage }) => (
   <Box fill pad="xlarge">
     <Box width="large" gap="medium" align="start">
-      <Heading>Sites</Heading>
-      <Text>
-        <Anchor onClick={() => openSitePageById('test-frontity-io')}>
-          test-frontity-io
-        </Anchor>
-      </Text>
-      <Text>
-        <Anchor onClick={() => openSitePageById('blog-frontity-com')}>
-          blog-frontity-com
-        </Anchor>
-      </Text>
+      <Heading margin="0">Sites</Heading>
+      {user &&
+        user.sites.map(site => (
+          <Box key={site.id}>
+            <Text>
+              <Anchor onClick={() => openSitePage(site)}>{site.url}</Anchor>
+            </Text>
+          </Box>
+        ))}
       <Button primary label="new site" onClick={openNewSitePage} />
     </Box>
   </Box>
 );
 
 export default wrap.default(store => ({
-  openSitePageById: store.router.openSitePageById,
-  openNewSitePage: store.router.openNewSitePage,
-  logOut: store.logOut,
   user: store.user,
+  openSitePage: store.router.openSitePage,
+  openNewSitePage: store.router.openNewSitePage,
 }))(Sites);
