@@ -1,4 +1,5 @@
 import { types } from 'mobx-state-tree';
+import graphqlActions from './graphql-actions';
 
 export const Package = types.model('Package', {
   id: types.identifier,
@@ -13,16 +14,18 @@ export const Setting = types.model('Setting', {
   data: types.frozen(),
 });
 
-export const Site = types.model('Site', {
-  id: types.identifier,
-  siteId: types.string,
-  url: types.string,
-  settings: types.array(Setting),
-});
+export const Site = types
+  .model('Site', {
+    id: types.identifier,
+    siteId: types.string,
+    url: types.string,
+    settings: types.array(Setting),
+  })
+  .actions(graphqlActions);
 
 export const User = types.model('User', {
   id: types.identifier,
   name: types.string,
   email: types.string,
-  sites: types.array(Site),
+  sites: types.array(types.reference(types.late(() => Site))),
 });

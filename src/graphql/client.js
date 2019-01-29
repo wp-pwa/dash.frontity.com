@@ -10,7 +10,7 @@ const getAuthorization = () => {
 };
 
 const client = new GraphQLClient(
-  'https://api.graph.cool/simple/v1/frontity-v1',
+  'https://api.graph.cool/simple/v1/cjp86mt6l5scv0195y0w2xq9f',
   {
     headers: getAuthorization(),
     credentials: 'same-origin',

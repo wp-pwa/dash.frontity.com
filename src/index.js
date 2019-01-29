@@ -5,6 +5,8 @@ import { setStore } from 'mobx-react-wrapper/dist/mobx-react-wrapper.js';
 import store from './store';
 import * as serviceWorker from './serviceWorker';
 
+window.store = store;
+
 setStore(store);
 
 ReactDOM.render(<App />, document.getElementById('root'));

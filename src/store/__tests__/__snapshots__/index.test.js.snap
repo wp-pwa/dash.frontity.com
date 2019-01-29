@@ -2,10 +2,12 @@
 
 exports[`has the right properties 1`] = `
 Object {
+  "packages": Array [],
   "router": Object {
     "page": "sites",
     "selectedSiteId": "",
   },
+  "sites": Array [],
   "user": null,
 }
 `;
